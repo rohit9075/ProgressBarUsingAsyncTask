@@ -1,66 +1,64 @@
 package com.rohit.progressbar;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
-    ProgressBar pb;
-    Button startBtn;
+    ProgressBar mProgressbar;
+    Button mButtonStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        pb=(ProgressBar) findViewById(R.id.progressBar1);
-        startBtn=(Button) findViewById(R.id.startBtn);
+        mProgressbar =(ProgressBar) findViewById(R.id.progressBar1);
+        mButtonStart =(Button) findViewById(R.id.startBtn);
 
-        //ONCLICK
-        startBtn.setOnClickListener(new OnClickListener() {
+        // Button click handling
+        mButtonStart.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                // TODO Auto-generated method stub
+                // calling the asynck task inner class.
                 new Downloader().execute();
             }
         });
 
     }
 
+    // inner class
     class Downloader extends AsyncTask<Void, Integer, Integer>
     {
 
         @Override
         protected void onPreExecute() {
-            // TODO Auto-generated method stub
             super.onPreExecute();
 
-            //SET PB PROIPERTIES
-            pb.setMax(100);
+            //set progress bar maximum value
+            mProgressbar.setMax(100);
 
         }
         @Override
         protected void onProgressUpdate(Integer... values) {
-            // TODO Auto-generated method stub
             super.onProgressUpdate(values);
 
-            //UPDATE PROGRESSBAR
-            pb.setProgress(values[0]);
+            //update progress bar value
+            mProgressbar.setProgress(values[0]);
 
         }
 
         @Override
         protected Integer doInBackground(Void... arg0) {
-            // TODO Auto-generated method stub
 
-            //DO HEAVY JOB
+            //this method is used to perform heavy task
             for(int i=0;i<100;i++)
             {
                 publishProgress(i);
@@ -79,9 +77,9 @@ public class MainActivity extends Activity {
 
         @Override
         protected void onPostExecute(Integer result) {
-            // TODO Auto-generated method stub
             super.onPostExecute(result);
 
+            // printing the toast on progressbar value reached to 100.
             Toast.makeText(getApplicationContext(), "Download Finished !!", Toast.LENGTH_LONG).show();
         }
 
