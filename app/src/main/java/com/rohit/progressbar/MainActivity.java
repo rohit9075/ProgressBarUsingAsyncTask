@@ -27,14 +27,19 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                // calling the asynck task inner class.
+                // calling the async task inner class.
                 new Downloader().execute();
             }
         });
 
     }
 
-    // inner class
+
+    /**
+     * Params, the type of the parameters sent to the task upon execution.
+     * Progress, the type of the progress units published during the background computation.
+     * Result, the type of the result of the background computation.
+     */
     class Downloader extends AsyncTask<Void, Integer, Integer>
     {
 
@@ -42,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
+            Toast.makeText(MainActivity.this, "Download started", Toast.LENGTH_SHORT).show();
             //set progress bar maximum value
             mProgressbar.setMax(100);
 
