@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mProgressbar =(ProgressBar) findViewById(R.id.progressBar1);
-        mButtonStart =(Button) findViewById(R.id.startBtn);
+        mProgressbar =findViewById(R.id.progressBar1);
+        mButtonStart = findViewById(R.id.startBtn);
 
         // Button click handling
         mButtonStart.setOnClickListener(new OnClickListener() {
